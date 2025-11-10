@@ -3,14 +3,14 @@ public:
     bool isIsomorphic(string s, string t) 
     {
         int hash[256]={0};  //mapping each char of lan s to lan t
-        bool istcharmapped[256]={0};//store if allready t[i] i smapped with s[i]
+        int istcharmapped[256]={0};//store if allready t[i] i smapped with s[i]
          
         for(int i=0;i<s.size();i++)
         {
             if(hash[s[i]]==0 && istcharmapped[t[i]]==0)
             {
                 hash[s[i]]=t[i];
-                istcharmapped[t[i]]=true;
+                istcharmapped[t[i]]=s[i];
             }
         }
         for(int i=0;i<s.size();i++)

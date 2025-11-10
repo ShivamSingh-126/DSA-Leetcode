@@ -5,7 +5,7 @@ public:
         int i = 0;
         while (true) {
             char cur_ch = 0;
-            for (auto str : strs) {
+            for (const string &str : strs) {
                 if (i >= str.size()) {
                     cur_ch = 0;
                     break;

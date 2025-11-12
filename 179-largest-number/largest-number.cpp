@@ -2,10 +2,11 @@ class Solution {
 public:
 static bool mycmp(string a,string b)
 {
-    string t1=a+b;
-    string t2=b+a;
+    // string t1=a+b;
+    // string t2=b+a;
 
-    return t1>t2;
+    // return t1>t2;
+    return a+b>b+a;
 }
     string largestNumber(vector<int>& nums) 
     {
@@ -17,7 +18,7 @@ static bool mycmp(string a,string b)
         sort(snums.begin(),snums.end(),mycmp);
         if(snums[0]=="0")  return "0";
         string ans="";
-        for(auto str:snums)
+        for(auto &str:snums)
         {
             ans+=str;
         }

@@ -14,12 +14,13 @@ public:
                 high--;
             }
         }
-        vector<int>ans;
-        for(int i=low;i<=high;i++)
-        {
-            ans.push_back(arr[i]);
-        }
-        return ans;
+        // vector<int>ans;
+        // for(int i=low;i<=high;i++)
+        // {
+        //     ans.push_back(arr[i]);
+        // }
+        // return ans;
+        return vector<int>(arr.begin()+low,arr.begin()+high+1);
     }
     vector<int> findClosestElements(vector<int>& arr, int k, int x) 
     {

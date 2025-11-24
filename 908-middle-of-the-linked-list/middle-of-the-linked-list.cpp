@@ -11,6 +11,8 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
+        /*      Brute force
+
         ListNode* temp = head;
         int count = 0;
         while (temp != NULL) {
@@ -34,6 +36,15 @@ public:
                 i++;
             }
             return curr;
+            */
+        //  Optimal
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr  && fast->next != nullptr ) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
+        return slow;
     }
 };

@@ -39,20 +39,23 @@ public:
         // return NULL;
 
         // Optimal Solution
+        if(headA==NULL || headB==NULL)  return NULL;
         ListNode* tempA = headA;
         ListNode* tempB = headB;
 
         while (tempA != tempB) {
-            tempA = tempA->next;
-            tempB = tempB->next;
+            // tempA = tempA->next;
+            // tempB = tempB->next;
 
-            if (tempA == tempB)
-                return tempA;
+            // if (tempA == tempB)
+            //     return tempA;
 
-            if (tempA == NULL)
-                tempA = headB;
-            if (tempB == NULL)
-                tempB = headA;
+            // if (tempA == NULL)
+            //     tempA = headB;
+            // if (tempB == NULL)
+            //     tempB = headA;
+            tempA = (tempA == NULL) ? headB : tempA->next;
+            tempB = (tempB == NULL) ? headA : tempB->next;
         }
         return tempA;
     }

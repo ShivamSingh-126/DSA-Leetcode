@@ -22,20 +22,38 @@ public:
         // return tempA;
 
         // Hashing Method
-        ListNode* temp;
-        map<ListNode*, int> mpp;
+        // ListNode* temp;
+        // map<ListNode*, int> mpp;
 
-        temp = headA;
-        while (temp != NULL) {
-            mpp[temp] = 1;
-            temp = temp->next;
+        // temp = headA;
+        // while (temp != NULL) {
+        //     mpp[temp] = 1;
+        //     temp = temp->next;
+        // }
+        // temp = headB;
+        // while (temp != NULL) {
+        //     if (mpp.find(temp) != mpp.end())
+        //         return temp;
+        //     temp = temp->next;
+        // }
+        // return NULL;
+
+        // Optimal Solution
+        ListNode* tempA = headA;
+        ListNode* tempB = headB;
+
+        while (tempA != tempB) {
+            tempA = tempA->next;
+            tempB = tempB->next;
+
+            if (tempA == tempB)
+                return tempA;
+
+            if (tempA == NULL)
+                tempA = headB;
+            if (tempB == NULL)
+                tempB = headA;
         }
-        temp = headB;
-        while (temp != NULL) {
-            if (mpp.find(temp) != mpp.end())
-                return temp;
-            temp = temp->next;
-        }
-        return NULL;
+        return tempA;
     }
 };

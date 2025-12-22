@@ -20,7 +20,7 @@ public:
         while ( sr <= er && sc <= ec) {
 
             // left → right (starting row)
-            for (int j = sc; j <= ec && head; j++) {
+            for (int j = sc; j <= ec ; j++) {
                 if(head==NULL)  break;
                 mat[sr][j] = head->val;
                 head = head->next;

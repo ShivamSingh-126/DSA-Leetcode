@@ -1,5 +1,23 @@
 class Solution {
 public:
+int slidingwindowcount(vector<int>& nums, int d)
+{
+    int i=0;
+    int j=1;
+    int paircount=0;
+    int n=nums.size();
+
+    while(j<n)
+    {
+        while(nums[j] - nums[i] > d)
+        {
+            i++;
+        }
+        paircount+=(j-i);
+        j++;
+    }
+    return paircount;
+}
     int smallestDistancePair(vector<int>& nums, int k) 
     {/*
         // Brute Force
@@ -65,6 +83,7 @@ public:
         return -1;
         */
 
+        /*
         // Nth_element
         vector<int> dist;
         int n = nums.size();
@@ -78,5 +97,29 @@ public:
         // Place k-1 th smallest element at correct position
         nth_element(dist.begin(), dist.begin() + k - 1, dist.end());
         return dist[k - 1];
+        */
+
+        // Optimal Approach
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        int low=0,high=nums[n-1]-nums[0];
+
+        int result=0;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            int countpair=slidingwindowcount(nums,mid);
+
+            if(countpair < k)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                result=mid;
+                high=mid-1;                
+            }
+        }
+        return result;
     }
 };

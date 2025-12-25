@@ -18,6 +18,7 @@ public:
 
         return res[k-1];
         */
+
         //Using Max-Heap;
         /*
         priority_queue<int> maxHeap;
@@ -38,6 +39,8 @@ public:
         }
         return maxHeap.top();
         */
+
+        /*
         int n=nums.size();
         int maxi=*max_element(nums.begin(),nums.end());
         vector<int> vec(maxi+1,0);
@@ -60,5 +63,20 @@ public:
             }
         }
         return -1;
+        */
+
+        // Nth_element
+        vector<int> dist;
+        int n = nums.size();
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                dist.push_back(abs(nums[i] - nums[j]));
+            }
+        }
+
+        // Place k-1 th smallest element at correct position
+        nth_element(dist.begin(), dist.begin() + k - 1, dist.end());
+        return dist[k - 1];
     }
 };

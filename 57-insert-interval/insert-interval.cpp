@@ -27,12 +27,12 @@ public:
         intervals.push_back(newInterval);
         return intervals;
         */
-        
+
         // Optimal 
         vector<vector<int>> ans;
         int n=intervals.size();
         int i=0;
-        while(i < n)
+        while(i < n )
         {
             if(intervals[i][1] < newInterval[0])
             {

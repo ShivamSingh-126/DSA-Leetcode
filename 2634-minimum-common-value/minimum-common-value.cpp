@@ -19,8 +19,8 @@ public:
         return ans==INT_MAX ?-1 : ans;
         */
 
+/*
         int i=0,j=0;
-        int ans=INT_MAX;
 
         while(i < nums1.size() && j < nums2.size())
         {
@@ -36,6 +36,20 @@ public:
             {
                 j++;
             }
+        }
+        return -1;
+*/
+
+        // Hash table
+
+        unordered_set<int> st;
+        for(int x : nums1)
+        st.insert(x);
+
+        for(int x : nums2)
+        {
+            if(st.count(x))
+                return x;
         }
         return -1;
     }

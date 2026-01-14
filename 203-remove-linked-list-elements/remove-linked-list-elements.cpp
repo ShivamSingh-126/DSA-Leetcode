@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) 
     {
-        /*
+        
         if(head==NULL) return NULL;
         ListNode* dummy=new ListNode(0);
         dummy->next=head;
@@ -32,19 +32,19 @@ public:
             }
         }
         return dummy->next;
-        */
+        
         // Recursive Approach
 
-        if(head==NULL) return NULL;
+        // if(head==NULL) return NULL;
 
-        head->next=removeElements(head->next,val);
-        if(head->val==val )
-        {
-            ListNode* curr=head->next;
-            delete head;
-            return curr;
-        }
-        return head;
+        // head->next=removeElements(head->next,val);
+        // if(head->val==val )
+        // {
+        //     ListNode* curr=head->next;
+        //     delete head;
+        //     return curr;
+        // }
+        // return head;
     }
     
 };

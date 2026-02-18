@@ -20,7 +20,7 @@ public:
         }
         return count;
         */
-
+    /*
         int counta=0;
         if (n == 0) return 0;
         for(int i=n-1;i>=0;i--)
@@ -43,5 +43,18 @@ public:
         }
 
         return count;
+        */
+        int bcount=0;
+        int mindel=0;
+        for(char ch : s)
+        {
+            if(ch=='b')  bcount++;
+
+            else
+            {
+                mindel=min(mindel+1,bcount);
+            }
+        }
+        return mindel;
     }
 };

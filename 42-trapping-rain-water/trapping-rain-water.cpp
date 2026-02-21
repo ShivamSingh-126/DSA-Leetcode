@@ -1,7 +1,8 @@
 class Solution {
 public:
     int trap(vector<int>& height) 
-    {
+    {/*
+        //  Prefix Sum Method  
         int n=height.size();
 
         vector<int> left(n,0);
@@ -25,5 +26,29 @@ public:
             ans+=min(left[i],right[i]) - height[i];
         }
         return ans;
+        */
+
+        int n=height.size();
+        int l=0,r=n-1,ans=0;
+
+        int lmax=0,rmax=0;
+
+        while(l < r)
+        {
+            lmax=max(lmax,height[l]);
+            rmax=max(rmax,height[r]);
+
+            if(lmax < rmax)
+            {
+                ans+=(lmax-height[l]);
+                l++;
+            }
+            else
+            {
+                ans+=(rmax-height[r]);
+                r--;
+            }
+        }
+        return ans;        
     }
 };

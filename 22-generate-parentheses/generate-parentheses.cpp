@@ -14,6 +14,10 @@ public:
     {
         vector<string>ans;
         generate(n,0,0,"",ans);
+        for(string s : ans)
+        {
+            cout << s << endl;
+        }
         return ans;
     }
 };

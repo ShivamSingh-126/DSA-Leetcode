@@ -16,7 +16,7 @@ public:
         temp.pop_back();
         solve(n,k,ans,temp,start+1);
         */
-        for(int i=start;i<=n;i++)
+        for(int i=start;i<=n-k+1;i++)
         {
             temp.push_back(i);
             solve(n,k-1,ans,temp,i+1);

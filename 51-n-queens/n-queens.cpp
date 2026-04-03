@@ -3,7 +3,7 @@ public:
     unordered_map<int,bool>hc;
     unordered_map<int,bool>ldc;
     unordered_map<int,bool>udc;
-    bool isPossible(int row,int col,vector<vector<char>> &board)
+    bool isPossible(int row,int col,vector<string> &board)
     {
         int n=board.size();
         // we need to check only 3 direction
@@ -47,7 +47,7 @@ public:
         return true;
     }
 
-    void solution(vector<vector<char>> &board,vector<vector<string>> &ans,int n)
+    void solution(vector<string> &board,vector<vector<string>> &ans,int n)
     {
         vector<string> temp;
         for(int row=0;row<n;row++)
@@ -62,12 +62,13 @@ public:
         }
         ans.push_back(temp);    // temp fill with all string
     }
-    void solve(vector<vector<char>> &board,vector<vector<string>> &ans,int n,int col)
+    void solve(vector<string> &board,vector<vector<string>> &ans,int n,int col)
     {
         // base case
         if(col >= n)
         {
-            solution(board,ans,n);
+            // solution(board,ans,n);
+            ans.push_back(board);
             return ;            
         }
         // solve 1 case and other left on recursion
@@ -91,7 +92,8 @@ public:
     }
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> ans;
-        vector<vector<char>> board(n, vector<char>(n, '.'));
+        // vector<vector<char>> board(n, vector<char>(n, '.'));
+        vector<string>board(n,string(n,'.'));
         int col = 0;
         solve(board, ans, n, col);
         return ans;

@@ -1,39 +1,49 @@
 class Solution {
 public:
+    unordered_map<int,bool>hc;
+    unordered_map<int,bool>ldc;
+    unordered_map<int,bool>udc;
     bool isPossible(int row,int col,vector<vector<char>> &board)
     {
         int n=board.size();
         // we need to check only 3 direction
-        // left horizontal
-        for(int i=0;i<col;i++)
-        {
-            if(board[row][i] == 'Q')
-            {
-                return false;   // that means one queen attack on another queen
-            }
-        }
-        // left upper diagonal
-        int i=row-1;
-        int j=col-1;
-        while(i>=0 && j>=0)
-        {
-            if(board[i][j] == 'Q')
-            {
-                return false;   // that means one queen attack on another queen
-            }
-            i--,j--;
-        }   
-        //left lower diagonals 
-        int x=row+1;
-        int y=col-1;
-        while(x<n && y>=0)
-        {
-            if(board[x][y] == 'Q')
-            {
-                return false;   // that means one queen attack on another queen
-            }
-            x++,y--;
-        }
+
+                    // left horizontal
+        // for(int i=0;i<col;i++)
+        // {
+        //     if(board[row][i] == 'Q')
+        //     {
+        //         return false;   // that means one queen attack on another queen
+        //     }
+        // }
+            if(hc[row] == true) return false;
+            
+                    // left upper diagonal
+        // int i=row-1;
+        // int j=col-1;
+        // while(i>=0 && j>=0)
+        // {
+        //     if(board[i][j] == 'Q')
+        //     {
+        //         return false;   // that means one queen attack on another queen
+        //     }
+        //     i--,j--;
+        // }
+        if(udc[row-col] == true)  return false;
+
+                    //left lower diagonals 
+        // int x=row+1;
+        // int y=col-1;
+        // while(x<n && y>=0)
+        // {
+        //     if(board[x][y] == 'Q')
+        //     {
+        //         return false;   // that means one queen attack on another queen
+        //     }
+        //     x++,y--;
+        // }
+        if(ldc[row+col] == true)  return false;
+
         return true;
     }
 
@@ -66,10 +76,16 @@ public:
             if(isPossible(row,col,board))
             {
                 board[row][col] = 'Q';
+                hc[row] = true;
+                ldc[row+col] = true;
+                udc[row-col] = true;
                 // call recursion for other
                 solve(board,ans,n,col+1);
                 //Backtracking
                 board[row][col] = '.';
+                hc[row] = false;
+                ldc[row+col] = false;
+                udc[row-col] = false;
             }
         }
     }

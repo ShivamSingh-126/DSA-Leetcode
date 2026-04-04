@@ -10,12 +10,13 @@ public:
         }
         if(grid[i][j] == 2)
         {
-            if(count == Nobs)
+            if(count == Nobs)   //NonObstacle Path
             {
                 result++;
             }
             return;
         }
+        int store=grid[i][j];
         grid[i][j] = -1;
 
         for(vector<int>&dir : directions)
@@ -26,7 +27,7 @@ public:
             backtrack(grid,count+1,new_i,new_j);
         }
 
-        grid[i][j]=0;
+        grid[i][j]=store;
     }
     int uniquePathsIII(vector<vector<int>>& grid) 
     {

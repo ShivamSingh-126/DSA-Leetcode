@@ -11,6 +11,21 @@
  */
 class Solution {
 public:
+    int diameter=0;
+    int solve(TreeNode* root)
+    {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        int left=solve(root->left);
+        int right=solve(root->right);
+
+        diameter=max(diameter,left+right);
+
+        return 1+max(left,right);
+    }
+/*
       int maxDepth(TreeNode* root) 
     {
         if(root == NULL)
@@ -24,9 +39,10 @@ public:
         return count;
         
     }
-
+*/
     int diameterOfBinaryTree(TreeNode* root) 
     {
+        /*
         if(root == NULL)
         {
             return 0;            
@@ -37,5 +53,9 @@ public:
 
         int count=max(rootnode,max(leftnode,rightnode));
         return count;
+        */
+        diameter=0;
+        solve(root);
+        return diameter;
     }
 };

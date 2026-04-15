@@ -1,30 +1,25 @@
 class Solution {
 public:
-    int t[201][1001];
-    int solve(vector<int>& nums,int idx, int target)
-    {        
+    int t[1001];
+    int solve(vector<int>& nums, int target) {
 
-        if(target == 0 )
-        {
-            return 1;            
+        if (target == 0) {
+            return 1;
         }
-        if(idx >= nums.size() || target < 0)
-        {
+        if (target < 0) {
             return 0;
         }
-        if(t[idx][target] != -1)
-        {
-            return t[idx][target];
+        if (t[target] != -1) {
+            return t[target];
         }
-
-        int taken_idx=solve(nums,0,target-nums[idx]);
-        int rej_idx=solve(nums,idx+1,target);
-
-        return t[idx][target]=taken_idx+rej_idx;
+        int count = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            count += solve(nums, target - nums[i]);
+        }
+        return t[target] = count;
     }
-    int combinationSum4(vector<int>& nums, int target) 
-    {   
-        memset(t,-1,sizeof(t));
-        return solve(nums,0,target);
+    int combinationSum4(vector<int>& nums, int target) {
+        memset(t, -1, sizeof(t));
+        return solve(nums, target);
     }
 };

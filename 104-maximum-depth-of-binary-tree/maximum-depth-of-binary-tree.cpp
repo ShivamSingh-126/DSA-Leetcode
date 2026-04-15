@@ -17,11 +17,14 @@ public:
         {
             return 0;
         }
+        /*
         int leftnode=maxDepth(root->left) +1;
         int rightnode=maxDepth(root->right) +1;
 
         int count=max(leftnode,rightnode);
         return count;
+        */
+        return 1 + max(maxDepth(root->left) , maxDepth(root->right));
         
     }
 };

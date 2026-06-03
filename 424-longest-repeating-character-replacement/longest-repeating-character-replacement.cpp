@@ -23,6 +23,7 @@ public:
         }
         return maxlen;
         */
+        /*
         int maxlen=0,l=0,r=0,maxFreq=0;
         map<char,int> mpp;
         while(r<s.size())
@@ -36,6 +37,28 @@ public:
             }          
             maxlen=max(maxlen,r-l+1);
             r=r+1;
+        }
+        return maxlen;
+        */
+        int n=s.size();
+        int low=0;
+        int maxfreq=INT_MIN;
+        int maxlen=INT_MIN;
+        unordered_map<char,int>mpp;
+
+        for(int high=0;high<n;high++)
+        {
+            mpp[s[high]]++;
+
+            maxfreq=max(maxfreq,mpp[s[high]]);
+
+            while((high-low+1) - maxfreq > k)
+            {
+                mpp[s[low]]--;
+                low++;
+            }
+            int len=high-low+1;
+            maxlen=max(maxlen,len);
         }
         return maxlen;
     }

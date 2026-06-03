@@ -44,21 +44,26 @@ public:
         }
         return maxlen;
         */
+        // TC O(n)
+        
         int maxlen = 0, l = 0, r = 0, zero = 0;
-        while (r < nums.size()) {
+        for(r=0;r < nums.size();r++) 
+        {
             if (nums[r] == 0)
                 zero++;
 
-            if (zero > k) {
-                if (nums[l] == 0) {
+            while (zero > k) 
+            {
+                if (nums[l] == 0) 
+                {
                     zero--;
                 }
                 l++;
             }
-            if (zero <= k) {
+            if (zero <= k) 
+            {
                 maxlen = max(maxlen, r - l + 1);
             }
-            r++;
         }
         return maxlen;
     }

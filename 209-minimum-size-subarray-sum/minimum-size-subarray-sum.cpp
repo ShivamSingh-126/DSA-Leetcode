@@ -2,23 +2,20 @@ class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) 
     {
-        int n=nums.size(),cursum=0,mini=INT_MAX;
-        int low=0,high=0;
-        while(high<n)
-        {   // find cursum and inc window size
-            cursum+=nums[high];
-            high++;
-
-            // try to reduce curwinsize
-            while(cursum >= target)
+        int n=nums.size();
+        int low=0,ans=INT_MAX;
+        int sum=0;
+        for(int high =0;high<n;high++)
+        {
+            sum +=nums[high];
+            while(sum >= target)
             {
-                int cws=high-low;
-                mini=min(mini,cws);
+                ans=min(ans,high-low+1);
 
-                cursum-= nums[low];
+                sum -=nums[low];
                 low++;
             }
         }
-        return mini == INT_MAX ? 0: mini;
+        return ans == INT_MAX ? 0 : ans;
     }
 };

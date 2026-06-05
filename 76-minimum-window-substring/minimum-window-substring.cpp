@@ -2,35 +2,37 @@ class Solution {
 public:
     string minWindow(string s, string t) 
     {
-       int hs[256] = {0};
-        int l=0,r=0,n=s.size(),m=t.size(),sidx=-1,count=0,minlen=INT_MAX;
-        for(int i=0;i<m;i++)
+        unordered_map<char,int>mpp;
+        for(char ch : t)
         {
-            hs[t[i]]++;
+            mpp[ch]++;
         }
-        while(r < n)
+        int low=0,n=s.size(),minlen=INT_MAX;
+        int req=t.size(),start=0;
+        for(int high=0;high<n;high++)
         {
-            if(hs[s[r]] > 0)
+            if(mpp[s[high]] >0)
             {
-                count++;
+                req--;
             }
-            hs[s[r]]--;
-            while(count == m)
+            mpp[s[high]]--;
+
+            while(req == 0)
             {
-                if(r-l+1 < minlen)
+                if(high-low+1 < minlen)
                 {
-                    minlen=r-l+1;
-                    sidx=l;
+                    minlen=high-low+1;
+                    start=low;
                 }
-                hs[s[l]]++;
-                if(hs[s[l]] > 0)
+                mpp[s[low]]++;
+
+                if(mpp[s[low]] > 0)
                 {
-                    count--;
+                    req++;
                 }
-                l++;          
+                low++;
             }
-            r++;
         }
-        return sidx==-1 ?"":s.substr(sidx,minlen);
+        return minlen == INT_MAX ? "" : s.substr(start,minlen);
     }
 };

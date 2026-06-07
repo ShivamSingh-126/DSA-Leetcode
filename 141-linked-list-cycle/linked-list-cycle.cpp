@@ -8,29 +8,21 @@
  */
 class Solution {
 public:
-    bool hasCycle(ListNode* head) {
-        /* //Brute force
-        map<ListNode*, int> mpp;
-        ListNode* temp = head;
-        while (temp != NULL) {
-            if (mpp.find(temp) != mpp.end()) {
-                return true;
-            } else {
-                mpp[temp] == 1;
-                temp = temp->next;
-            }
-        }
-        return false;
-        */
-        // optimal
-        ListNode* slow = head;
-        ListNode* fast = head;
-        while (fast != NULL && fast->next != NULL) {
-            slow = slow->next;
-            fast = fast->next->next;
+    bool hasCycle(ListNode *head) 
+    {
+        if(head == NULL)  return false;
+        ListNode* slow=head;
+        ListNode* fast=head;
 
-            if (slow == fast)
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+
+            if(slow == fast)
+            {
                 return true;
+            }
         }
         return false;
     }

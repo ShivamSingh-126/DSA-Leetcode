@@ -1,61 +1,50 @@
 class Solution {
 public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) 
+    {
+        int n=intervals.size();
+        sort(intervals.begin(),intervals.end());
+        int start1 = intervals[0][0];
+        int end1 = intervals[0][1];
+        vector<vector<int>> res;
+
+        for(int i=1;i<n;i++)
+        {
+            int start2 = intervals[i][0];
+            int end2 = intervals[i][1];
+
+            if(end1 >= start2)  // merge hoga
+            {
+                end1 = max(end1,end2);
+                continue;
+            }
+            res.push_back({start1,end1});
+            start1 = start2;
+            end1 = end2;
+        }
+        res.push_back({start1,end1});
+        return res;
+    }
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) 
     {
-        /*
-        // Brute Force 
-        int i=0;
-        while(i < intervals.size())
-        {
-            if(intervals[i][1] < newInterval[0])
-            {
-                i++;
-            }
-            else if(intervals[i][0] > newInterval[1])
-            {
-                intervals.insert(intervals.begin() + i,newInterval);
-                return intervals;
-            }
-            else
-            {
-                newInterval[0]=min(newInterval[0],intervals[i][0]);
-                newInterval[1]=max(newInterval[1],intervals[i][1]);
-
-                intervals.erase(intervals.begin() + i);
-            }
-        }
-        intervals.push_back(newInterval);
-        return intervals;
-        */
-
-        // Optimal 
-        vector<vector<int>> ans;
+        int start;
         int n=intervals.size();
-        int i=0;
-        while(i < n )
+        bool clip = false;
+        vector<vector<int>> res;
+        for(int i=0;i<n;i++)
         {
-            if(intervals[i][1] < newInterval[0])
+            start = intervals[i][0];
+            if(clip == false && start >= newInterval[0])
             {
-                ans.push_back(intervals[i]);
+                res.push_back(newInterval);
+                clip = true;
             }
-            else if(intervals[i][0] > newInterval[1])
-            {
-                break;
-            }
-            else
-            {
-                newInterval[0]=min(newInterval[0],intervals[i][0]);
-                newInterval[1]=max(newInterval[1],intervals[i][1]);
-
-            }
-            i++;
+            res.push_back(intervals[i]);
         }
-        ans.push_back(newInterval);
-        while(i < n)
+        if(clip == false)
         {
-            ans.push_back(intervals[i]);
-            i++;
+            res.push_back(newInterval);
         }
-        return ans;
+        return merge(res);
     }
 };

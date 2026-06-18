@@ -4,19 +4,26 @@ public:
     {
         int n=intervals.size();
         sort(intervals.begin(),intervals.end());
-        vector<vector<int>> ans;
+        int start1 = intervals[0][0];
+        int end1 = intervals[0][1];
+        vector<vector<int>> res;
 
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
-            if(ans.empty() || intervals[i][0] > ans.back()[1])
+            int start2 = intervals[i][0];
+            int end2 = intervals[i][1];
+
+            if(end1 >= start2)  // merge hoga
             {
-                ans.push_back(intervals[i]);
+                start1 = start1;
+                end1 = max(end1,end2);
+                continue;
             }
-            else
-            {
-                ans.back()[1] = max(ans.back()[1] , intervals[i][1]);
-            }
+            res.push_back({start1,end1});
+            start1 = start2;
+            end1 = end2;
         }
-        return ans;
+        res.push_back({start1,end1});
+        return res;
     }
 };

@@ -2,8 +2,9 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) 
     {
+        if(intervals.empty()) return {};
         int n=intervals.size();
-        sort(intervals.begin(),intervals.end());
+        // sort(intervals.begin(),intervals.end());
         int start1 = intervals[0][0];
         int end1 = intervals[0][1];
         vector<vector<int>> res;

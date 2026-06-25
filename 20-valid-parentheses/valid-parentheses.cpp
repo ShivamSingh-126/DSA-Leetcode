@@ -6,22 +6,24 @@ public:
         stack<char>st;
         for(int i=0;i<n;i++)
         {
-            if(s[i]=='(' || s[i]=='{' || s[i]=='[')
+            if(s[i]=='(' || s[i]=='{'||s[i]=='[')
             {
                 st.push(s[i]);
+                continue;
+            }
+            if(st.empty())  return false;
+
+            if((s[i]==')' && st.top()=='(') || (s[i]=='}' && st.top()=='{') || (s[i]==']' && st.top()=='['))
+            {
+                st.pop();                
             }
             else
             {
-               if(st.empty())  return false;
-               char c=st.top();
-               st.pop();
-
-               if(s[i]==')' && c != '(' || s[i]=='}' && c != '{' || s[i]==']' && c != '[')
-            {
                 return false;
             }
-            }
         }
-        return st.empty();
+        if(!st.empty())  return false;
+
+        return true;
     }
 };

@@ -1,40 +1,26 @@
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
-        /*   Brute Force Approach
-
+    vector<int> dailyTemperatures(vector<int>& temperatures) 
+    {
         int n=temperatures.size();
-        vector<int> ans(n,0);
-        for(int i=0;i<n;i++)
+        vector<int>res(n,0);
+        stack<int>st;
+        for(int i=n-1;i>=0;i--)
         {
-
-            int count=0;
-            for(int j=i+1;j<n;j++)
+            while(!st.empty() && temperatures[st.top()] <= temperatures[i])
             {
-                if(temperatures[i] < temperatures[j])
-                {
-                    ans[i]=j-i;
-                    break;
-                }
+                st.pop();                
             }
-        }
-        return ans;
-        */
-        // Monotonic stack
-        int n = temperatures.size();
-        vector<int> ans(n, 0);
-        stack<int> st;
-        for (int i = n - 1; i >= 0; i--) {
-            while (!st.empty() && temperatures[i] >= temperatures[st.top()]) {
-                st.pop();
+            if(st.empty())
+            {
+                res[i]=0;
             }
-            if (st.empty()) {
-                ans[i] = 0;
-            } else {
-                ans[i] = st.top() - i;
+            else
+            {
+                res[i]=st.top()-i;
             }
             st.push(i);
         }
-        return ans;
+        return res;
     }
 };

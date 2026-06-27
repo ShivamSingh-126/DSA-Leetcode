@@ -1,20 +1,30 @@
 class Solution {
 public:
-    vector<int> nextGreaterElements(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> res(n, -1);
-        stack<int> st;
-        for (int i = 2 * n - 1; i >= 0; i--) 
+    vector<int> nextGreaterElements(vector<int>& nums) 
+    {
+        int n=nums.size();
+        vector<int>res(n);
+        stack<int>st;
+
+        for(int i=n-2;i>=0;i--) // array ke sare element ko  chance dena hai
         {
-            while (!st.empty() && st.top() <= nums[i % n]) 
+            st.push(nums[i]);
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.empty() && st.top() <= nums[i])
             {
                 st.pop();
             }
-            if (i < n && !st.empty()) 
+            if(st.empty())
             {
-                res[i] = st.top();
+                res[i]=-1;
             }
-            st.push(nums[i % n]);
+            else
+            {
+                res[i]=st.top();
+            }
+            st.push(nums[i]);
         }
         return res;
     }

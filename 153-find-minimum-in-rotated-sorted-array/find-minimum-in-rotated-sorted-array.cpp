@@ -3,28 +3,21 @@ public:
     int findMin(vector<int>& nums) 
     {
         int n=nums.size();
-        int low=0;
-        int high=n-1;
-        int ans=INT_MAX;
-        while(low <= high)
+        int low=0,high=n-1;
+
+        while(low < high)
         {
-            int mid=low+(high-low)/2;
-            if(nums[low]<=nums[high])
+            int guess=low+(high-low)/2;
+
+            if(nums[guess] > nums[high])
             {
-                ans=min(ans,nums[low]);
-                break;
-            }
-            if(nums[low]<=nums[mid])
-            {
-                low=mid+1;
-                ans=min(ans,nums[low]);
-            }
+                low=guess+1;
+            }            
             else
-            {
-                high=mid-1;
-                ans=min(ans,nums[mid]);
+            {                
+                high=guess;
             }
         }
-        return ans;
+        return nums[low];
     }
 };

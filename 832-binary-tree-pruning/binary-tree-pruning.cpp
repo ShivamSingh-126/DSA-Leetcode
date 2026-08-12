@@ -11,6 +11,8 @@
  */
 class Solution {
 public:
+    //  O(n^2)
+    /*
     bool isOnePresent(TreeNode* root)
     {
         if(root == NULL)
@@ -23,8 +25,10 @@ public:
         }
         return isOnePresent(root->left) || isOnePresent(root->right);
     }
+    */
     TreeNode* pruneTree(TreeNode* root) 
     {
+        /*
         if(root == NULL) return NULL;
 
         if(!isOnePresent(root->left))
@@ -38,6 +42,18 @@ public:
 
         pruneTree(root->left);
         pruneTree(root->right);
+
+        if(root->left == NULL && root->right==NULL && root->val == 0)
+        {
+            return NULL;
+        }
+        return root;
+        */
+
+        if(root == NULL) return NULL;
+
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
 
         if(root->left == NULL && root->right==NULL && root->val == 0)
         {

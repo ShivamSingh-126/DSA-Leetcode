@@ -9,38 +9,29 @@
  */
 class Solution {
 public:
+    TreeNode* ans = NULL;
+    int helper(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
+        if(root == NULL)  return NULL;
+
+        int l = helper(root->left,p,q);
+        int r = helper(root->right,p,q);
+
+        int self = 0;
+        if(root == p || root == q)
+        {
+            self = 1;
+        }
+        int total = l + self + r;
+        if(total == 2 && ans == NULL)
+        {
+            ans = root;
+        }
+        return total;
+    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
     {
-        if(root == NULL)
-        {
-            return NULL;
-        }
-        if(root == p)
-        {
-            return p;
-        }
-         if(root == q)
-        {
-            return q;
-        }
-        TreeNode* leftans=lowestCommonAncestor(root->left,p,q);
-        TreeNode* rightans=lowestCommonAncestor(root->right,p,q);
-
-        if(leftans == NULL && rightans == NULL)
-        {
-            return NULL;
-        }
-        if(leftans == NULL && rightans != NULL)
-        {
-            return rightans;
-        }
-        if(leftans != NULL && rightans == NULL)
-        {
-            return leftans;
-        }
-        else
-        {
-            return root;
-        }
+        helper(root,p,q);
+        return ans;
     }
 };

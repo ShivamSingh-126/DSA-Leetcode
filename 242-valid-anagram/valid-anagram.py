@@ -5,4 +5,9 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        return Counter(s) == Counter(t)
+        # return Counter(s) == Counter(t)
+
+        if len(s) != len(t):
+            return False
+
+        return sorted(s) == sorted(t)

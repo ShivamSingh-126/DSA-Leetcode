@@ -18,5 +18,25 @@ class Solution(object):
             return dp[n]
 
         dp = [-1] * (n+1)   # step 1 create dp array
-        return topDown(n,dp)
+
+
+        def bottomUp(n):
+            dp = [-1] * (n+1)
+
+            dp[0]=0
+            if n==0:
+                return dp[0]
+            dp[1]=1
+            if n==1:
+                return dp[1]
+
+            for i in range(2,n+1):
+                dp[i]=dp[i-1]+dp[i-2]
+
+            return dp[n]
+
+
+        
+        #return topDown(n,dp)
+        return bottomUp(n)
         

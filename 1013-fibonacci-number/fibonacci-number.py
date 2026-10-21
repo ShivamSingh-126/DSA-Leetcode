@@ -21,8 +21,10 @@ class Solution(object):
 
 
         def bottomUp(n):
+            #Step 1 create dp list
             dp = [-1] * (n+1)
 
+            #Step 2 Observe base case
             dp[0]=0
             if n==0:
                 return dp[0]
@@ -30,6 +32,8 @@ class Solution(object):
             if n==1:
                 return dp[1]
 
+            
+            #Step 3 run loop
             for i in range(2,n+1):
                 dp[i]=dp[i-1]+dp[i-2]
 

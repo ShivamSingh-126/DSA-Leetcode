@@ -5,10 +5,17 @@ class Solution:
         maxi = -1
         mini = -1
 
+        # for i in range(len(nums)):
+        #     if nums[i] < minK or nums[i] > maxK:
+        #         left = i
+
+        #     count += i-left
+
         for i in range(len(nums)):
-            if nums[i] < minK or nums[i] > maxK:
+            if nums[i] >= minK and nums[i] <= maxK:
+                count += i-left
+
+            else:
                 left = i
-                
-            count += i-left
 
         return count

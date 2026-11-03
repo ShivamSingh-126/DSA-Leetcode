@@ -7,7 +7,7 @@ class Solution(object):
         n=len(nums)
         ans=0
 
-        def solverec(nums,index,dp):
+        def solvemem(nums,index,dp):
 
             if index >= n:
                 return 0
@@ -15,15 +15,15 @@ class Solution(object):
             if dp[index] != -1:
                 return dp[index]
 
-            include = nums[index] + solverec(nums,index+2,dp)
-            exclude = 0 + solverec(nums,index+1,dp)
+            include = nums[index] + solvemem(nums,index+2,dp)
+            exclude = 0 + solvemem(nums,index+1,dp)
             temp = max(include,exclude)
             dp[index] = temp
             return temp
 
         index=0
         dp = [-1] * (n+1)
-        ans = solverec(nums,index,dp)
+        ans = solvemem(nums,index,dp)
         return ans
 
         

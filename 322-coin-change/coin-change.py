@@ -1,52 +1,52 @@
 class Solution:
     def coinChange(self, coins: list[int], amount: int) -> int:
+        n=len(coins)
 
-        # def solRec(coin,amount):
+        # def solveRec(coins , amount):
         #     if amount == 0:
         #         return 0
-        #     if amount < 0:
-        #         return float('inf')
-
+            
         #     mini = float('inf')
 
-        #     for i in range(len(coins)):
-        #         ans = solRec(coins , amount-coins[i])
-        #         if ans != float('inf'):
-        #             mini = min(mini,1+ans)
-            
+        #     for i in range(0,n):
+        #         if coins[i] <= amount:
+        #             recans = solveRec(coins , amount - coins[i])
+
+        #             if recans != float('inf'):
+        #                 mini = min(mini , 1+recans)
+
         #     return mini
 
-        def solMem(coin,amount,dp):
+        def solveMemorisation(coins , amount,dp):
             if amount == 0:
                 return 0
 
-            if amount < 0:
-                return float('inf')
-
             if dp[amount] != -1:
                 return dp[amount]
-
+            
             mini = float('inf')
 
-            for i in range(len(coins)):
-                ans = solMem(coins , amount-coins[i],dp)
-                if ans != float('inf'):
-                    mini = min(mini,1+ans)
+            for i in range(0,n):
+                if coins[i] <= amount:
+                    recans = solveMemorisation(coins , amount - coins[i],dp)
+
+                    if recans != float('inf'):
+                        mini = min(mini , 1+recans)
 
             dp[amount] = mini
-            
             return mini
-        
-        # ans = solRec(coins,amount)
+
+
+        # ans = solveRec(coins , amount)
         # if ans == float('inf'):
         #     return -1
+        
+        # return ans
 
         dp = [-1] * (amount+1)
-        
-        ans = solMem(coins,amount,dp)
+        ans = solveMemorisation(coins , amount ,dp)
 
         if ans == float('inf'):
             return -1
-        
-        return ans
 
+        return ans

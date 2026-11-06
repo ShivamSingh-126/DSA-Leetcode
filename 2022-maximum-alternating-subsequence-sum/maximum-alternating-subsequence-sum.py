@@ -37,25 +37,47 @@ class Solution:
 
 
 
+        # def solveTab(nums):
+        #     n=len(nums)
+        #     dp = [[0] * 2 for _ in range(n+1)]
+
+        #     for index in range(n-1,-1,-1):
+
+        #         for flag in range(2):
+
+        #             skip = dp[index+1][flag]
+
+        #             val = nums[index]
+        #             if flag == False:
+        #                 val = -val
+                    
+        #             take = dp[index+1][not flag] + val
+        #             dp[index][flag] =  max(skip , take)
+
+        #     return dp[0][True]
+
+
         def solveTab(nums):
             n=len(nums)
-            dp = [[0] * 2 for _ in range(n+1)]
+            next = [0, 0]
 
             for index in range(n-1,-1,-1):
 
+                curr = [0, 0]
+
                 for flag in range(2):
 
-                    skip = dp[index+1][flag]
+                    skip = next[flag]
 
                     val = nums[index]
                     if flag == False:
                         val = -val
                     
-                    take = dp[index+1][not flag] + val
-                    dp[index][flag] =  max(skip , take)
+                    take = next[not flag] + val
+                    curr[flag] =  max(skip , take)
+                next = curr
 
-            return dp[0][True]
-
+            return next[True]
 
 
         # return solveRec(0,nums,True)

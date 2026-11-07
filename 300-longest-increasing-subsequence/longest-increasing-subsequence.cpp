@@ -19,13 +19,35 @@ public:
 
         return dp[i][p + 1] = max(take, skip);
     }
+    int solveTab(vector<int>& nums)
+    {
+        int n = nums.size();
+        vector<int>t(n,1);
+
+        int maxLIS = 1;
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(nums[i] > nums[j])
+                {
+                    t[i] = max(t[i] , t[j]+1);
+                    maxLIS = max(maxLIS , t[i]);
+                }
+            }
+        }
+        return maxLIS;
+    }
     
     int lengthOfLIS(vector<int>& nums) 
     {
         int n = nums.size();
 
-        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+        // vector<vector<int>> dp(n, vector<int>(n + 1, -1));
 
-        return solveMem(0, nums, -1, dp);
+        // return solveMem(0, nums, -1, dp);
+
+        return solveTab(nums);
     }
 };

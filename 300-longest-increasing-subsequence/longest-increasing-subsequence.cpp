@@ -1,53 +1,52 @@
 class Solution {
 public:
-    int solveMem(int i, vector<int>& nums, int p, vector<vector<int>>& dp) {
-        int n = nums.size();
-
-        if (i >= n)
-            return 0;
-
-        if (dp[i][p + 1] != -1)
-            return dp[i][p + 1];
-
-        int take = 0;
-
-        if (p == -1 || nums[i] > nums[p]) {
-            take = 1 + solveMem(i + 1, nums, i, dp);
-        }
-
-        int skip = solveMem(i + 1, nums, p, dp);
-
-        return dp[i][p + 1] = max(take, skip);
-    }
-    int solveTab(vector<int>& nums)
+    int solveRec(vector<int>& nums,int curr,int prev)
     {
-        int n = nums.size();
-        vector<int>t(n,1);
-
-        int maxLIS = 1;
-
-        for(int i=0;i<n;i++)
+        if(curr >= nums.size())
         {
-            for(int j=0;j<i;j++)
-            {
-                if(nums[i] > nums[j])
-                {
-                    t[i] = max(t[i] , t[j]+1);
-                    maxLIS = max(maxLIS , t[i]);
-                }
-            }
+            return 0;
         }
-        return maxLIS;
+        int include=0;
+        if(prev == -1 || nums[curr] > nums[prev])
+        {
+            include = 1 + solveRec(nums,curr+1,curr);
+        }
+        int exclude = 0 + solveRec(nums , curr+1,prev);
+
+        int maxans = max(include,exclude);
+        return maxans;
     }
-    
+
+    int solveMem(vector<int>& nums,int curr,int prev,vector<vector<int>>&dp)
+    {
+        if(curr >= nums.size())
+        {
+            return 0;
+        }
+        if(dp[curr][prev+1] != -1)
+        {
+            return dp[curr][prev+1];
+        }
+        int include=0;
+        if(prev == -1 || nums[curr] > nums[prev])
+        {
+            include = 1 + solveMem(nums,curr+1,curr,dp);
+        }
+        int exclude = 0 + solveMem(nums , curr+1,prev,dp);
+
+        dp[curr][prev+1] = max(include,exclude);
+        return dp[curr][prev+1];
+    }
+
     int lengthOfLIS(vector<int>& nums) 
     {
-        int n = nums.size();
+        int n=nums.size();
+        int prev=-1;
+        int curr=0;
+        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
 
-        // vector<vector<int>> dp(n, vector<int>(n + 1, -1));
-
-        // return solveMem(0, nums, -1, dp);
-
-        return solveTab(nums);
+        // int ans = solveRec(nums,curr,prev);
+        int ans = solveMem(nums,curr,prev,dp);
+        return ans;
     }
 };
